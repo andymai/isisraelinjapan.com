@@ -7,7 +7,9 @@ const config = {
     'redirectUrl': 'http://isisraelinjapan.com'
   }
 }
-const foursquareAccessToken = process.env.FOURSQUARE_TOKEN;
+// Use your account's OAUTH token. You need to be friends with Israel.
+const foursquareAccessToken = process.env.FOURSQUARE_TOKEN; 
+
 const foursquare = require('node-foursquare')(config);
 const express = require('express');
 const path = require('path');
