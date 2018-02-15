@@ -1,5 +1,5 @@
 # Is Israel in Japan?
- A simple website that uses the Foursquare API to determine if my friend, [Israel Sundseth](https://twitter.com/kappuru), is currently in Japan. See it in action at http://isisraeljapan.com
+ A simple website that uses the Foursquare API to determine if my friend, [Israel Sundseth](https://twitter.com/kappuru), is currently in Japan. See it in action at http://isisraelinjapan.com
  
  ## Features
  * Quickly see if you should even bother texting him if he wants to hang out.
