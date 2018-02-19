@@ -1,19 +1,19 @@
 {
-  "name": "isisraelinjapan.com",
-  "version": "1.0.0",
-  "description": "A website that tells you if Israel Sundseth is in Japan",
-  "author": "Andy Mai <hi@andymai.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andymai/isisraelinjapan.com"
-  },
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "ejs": "^2.5.7",
-    "express": "^4.16.1",
-    "node-foursquare": "^0.3.2"
-  }
+	"name": "isisraelinjapan.com",
+	"version": "1.0.0",
+	"description": "A website that tells you if Israel Sundseth is in Japan",
+	"author": "Andy Mai <hi@andymai.com>",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/andymai/isisraelinjapan.com"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"ejs": "^2.5.7",
+		"express": "^4.16.1",
+		"node-foursquare": "^0.3.2"
+	}
 }
