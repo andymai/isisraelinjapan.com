@@ -6,7 +6,7 @@ const config = {
     'clientSecret': process.env.FOURSQUARE_SECRET,
     'redirectUrl': 'http://isisraelinjapan.com'
   }
-}
+};
 // Use your account's OAUTH token. You need to be friends with Israel.
 const foursquareAccessToken = process.env.FOURSQUARE_TOKEN; 
 
@@ -23,25 +23,34 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/assets'));
 
-app.get('/', (req, res) => {
-
+const checkLocation = () => {
   // Get friends recent checkins
-  foursquare.Checkins.getRecentCheckins({ }, foursquareAccessToken, function (err, checkins) {
+  foursquare.Checkins.getRecentCheckins({}, foursquareAccessToken, function (err, checkins) {
     if (err) throw new Error(err);
 
-    var isHeInJapan = 'No'; // Default No
-
-    checkins.recent.forEach(function(checkin) {
+    checkins.recent.forEach(function (checkin) {
       // Check if his most recent checkin was in Japan
       if ((checkin.user.id == 354825) && (checkin.venue.location.country == "Japan")) {
-        isHeInJapan = 'Yes';
         return true;
       } else {
         return false;
       }
-    })
-    res.render(__dirname + '/index', { isHeInJapan: isHeInJapan });
+    });
   });
+  return false;
+};
+
+app.get('/', (req, res) => {
+    var checkedIn = checkLocation();
+    var isHeInJapan = 'No';
+    if (checkedIn) isHeInJapan = 'Yes';
+    res.render(__dirname + '/index', { isHeInJapan: isHeInJapan });
+});
+
+app.get('/api', (req, res) => {
+  var checkedIn = checkLocation();
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ is: checkedIn }));
 });
 
 app.listen(PORT, HOST);
