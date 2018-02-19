@@ -30,10 +30,8 @@ const checkLocation = () => {
 
     checkins.recent.forEach(function (checkin) {
       // Check if his most recent checkin was in Japan
-      if ((checkin.user.id == 354825) && (checkin.venue.location.country == "Japan")) {
-        return true;
-      } else {
-        return false;
+      if (checkin.user.id == 354825) {
+        return (checkin.venue.location.country == "Japan");
       }
     });
   });
