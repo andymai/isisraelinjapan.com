@@ -31,17 +31,13 @@ app.get('/', (req, res) => {
 
     var isHeInJapan = 'No'; // Default No
 
-    console.log(JSON.stringify(checkins));
-
     checkins.recent.forEach(function(checkin) {
       // Check if his most recent checkin was in Japan
-      if (checkin.user.id == 354825) {
-        if (checkin.venue.location.country == "Japan") {
-          isHeInJapan = 'Yes';
-          return true;
-        } else {
-          return false;
-        }
+      if ((checkin.user.id == 354825) && (checkin.venue.location.country == "Japan")) {
+        isHeInJapan = 'Yes';
+        return true;
+      } else {
+        return false;
       }
     })
     res.render(__dirname + '/index', { isHeInJapan: isHeInJapan });
