@@ -38,8 +38,8 @@ const checkLocation = () => {
 				return checkin.venue.location.country === 'Japan';
 			}
 		});
-		return false;
 	});
+	return false;
 };
 
 app.get('/', (req, res) => {
