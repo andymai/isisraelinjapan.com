@@ -27,36 +27,34 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/assets')));
 
-const checkLocation = () => {
-	// Get friends recent checkins
-	foursquare.Checkins.getRecentCheckins({}, foursquareAccessToken, function (err, checkins) {
+app.get('/', (req, res) => {
+	foursquare.Users.getDetails('354825', foursquareAccessToken, (err, details) => {
+		let answer = 'No'
 		if (err) throw new Error(err);
 
-		checkins.recent.forEach(function (checkin) {
-			// Check if his most recent checkin was in Japan
-			if (checkin.user.id === 354825) {
-				return checkin.venue.location.country === 'Japan';
-			}
-		});
-	});
-	return false;
-};
+		if (details.user.checkins.items[0].venue.location.country === 'Japan') {
+			answer = 'Yes'
+		} 
 
-app.get('/', (req, res) => {
-	let checkedIn = checkLocation();
-	let isHeInJapan = 'No';
-	if (checkedIn) isHeInJapan = 'Yes';
-	res.render(path.join(__dirname, '/index'), {
-		isHeInJapan: isHeInJapan
-	});
+		res.render(path.join(__dirname, '/index'), {
+			isHeInJapan: answer
+		});
+	})
 });
 
 app.get('/api', (req, res) => {
-	var checkedIn = checkLocation();
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify({
-		is: checkedIn
-	}));
+	foursquare.Users.getDetails('354825', foursquareAccessToken, (err, details) => {
+		let answer = 'No'
+		if (err) throw new Error(err);
+
+		if (details.user.checkins.items[0].venue.location.country === 'Japan') {
+			answer = 'Yes'
+		} 
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify({
+			is: answer
+		}));
+	})
 });
 
 app.listen(PORT, HOST, function () {
