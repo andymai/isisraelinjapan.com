@@ -12,9 +12,9 @@
 		"start": "node server.js"
 	},
 	"dependencies": {
-		"ejs": "^3.0.1",
-		"express": "^4.16.4",
+		"ejs": "^3.1.10",
+		"express": "^4.22.0",
 		"node-foursquare": "^0.4.6",
-		"request": "^2.88.0"
+		"request": "^2.88.2"
 	}
 }
